@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="mobile.css">
+    <title>Podcast Compress</title>
+</head>
+<body>
+    <section>
+        <header>
+            <svg role="button" aria-expanded="true" viewBox="0 0 100 80" width="40" height="40">
+                <title>Abrir menu</title>
+                <rect style="fill:#85868f;"  width="100" height="20" rx="8"></rect>
+                <rect style="fill:#cbcdda;" y="30" width="100" height="20" rx="8"></rect>
+                <rect style="fill:#85868f;"  y="60" width="100" height="20" rx="8"></rect>
+            </svg>
+            <nav>
+                <ul class="menu">
+                    <li><a href="#sobre">sobre</a></li>
+                    <li><a href="#contato">contato</a></li>
+                    <li><a href="#privacidade">privacidade</a></li>
+                    <li><a href="#atribuicoes">atribuições</a></li>
+                </ul>
+            </nav>
+            <img src="assets/image-header-crop.png" alt="Banner">
+        </header>
+        <div class="drop">
+            <h1>Envie seus arquivos para compressão.</h1>
+            <form class="box" method="post" action="" enctype="multipart/form-data">        
+                <div class="box__input">
+                  <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple accept="audio/*"/>
+                  <label for="file" title="Clique para escolher os arquivos"><span class="box__click">Escolha os arquivos</span><span class="box__dragndrop"> ou arraste para cá</span></label>
+                  <!-- <button class="box__button" type="submit">Escolha o arquivo!</button> -->
+                </div>
+                <div class="box__uploading">Uploading…</div>
+                <div class="box__success">Done!</div>
+                <div class="box__error">Error! <span></span>.</div>
+            </form>
+        </div>
+        <main>
+            <div class="buttons">
+                <div class="wrapper">
+                    <div class="button">
+                        <img class="loading" src="assets/loader.png" alt="Carregando...">
+                        Carregando...
+                        <img src="assets/button11.png" alt="Ícone">
+                    </div>
+                    <div class="content">
+                        <p class="title">5razoes_ec.mp3</p>
+                        <p class="duration">Duração: 11m01s</p>
+                        <div class="results">
+                            <p class="before">11.07mb</p>
+                            <img src="assets/right-arrow.png" alt="De para" class="arrow">
+                            <p class="after">3.67mb</p>
+                        </div>
+                        <a href="" class="download loading" role="button" title="Aguarde o download ficar pronto">Aguarde<img src="assets/loader.png" alt="Botão de aguarde, download ainda não está pronto"></a>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="button">
+                        <img class="complete" src="assets/complete.png" alt="Concluído">
+                        Concluído!
+                        <img src="assets/button11.png" alt="Ícone">
+                    </div>
+                    <div class="content">
+                        <p class="title">tecnicas\ uso\ email.mp3</p>
+                        <p class="duration">Duração: 11m01s</p>
+                        <div class="results">
+                            <p class="before">11.07mb</p>
+                            <img src="assets/right-arrow.png" alt="De para" class="arrow">
+                            <p class="after">3.67mb</p>
+                        </div>
+                        <a href="" class="download" role="button" title="Clique para baixar o arquivo">Download<img src="assets/reduce1.png" alt="Botão para download"></a>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="button">
+                        <img class="error" src="assets/error.png" alt="Erro">
+                        Erro!
+                        <img src="assets/button11.png" alt="Ícone">
+                    </div>
+                    <div class="content">
+                        <p class="title">tecnicas\ uso\ email.mp3</p>
+                        <p class="duration">Duração: 11m01s</p>
+                        <div class="results">
+                            <p class="before">11.07mb</p>
+                            <img src="assets/right-arrow.png" alt="De para" class="arrow">
+                            <p class="after">Erro!</p>
+                        </div>
+                        <a href="" class="download error" role="button" title="Clique para enviar novamente">Enviar novamente<img src="assets/retry1.png" alt="Botão de reenvio"></a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div id="sobre">
+                <div class="div-banner">
+                    <img src="assets/sobre.png" alt="Banner">
+                </div>
+                <h2>Compressão otimizada para web</h2>
+                <p>Nosso objetivo é garantir a maior compressão possível sem comprometer a qualidade do áudio, de forma a otimizar a experiência de seus ouvintes em redes móveis ou de baixa velocidade.</p>
+                <h3>Vantagens</h3>
+                <ul>
+                    <li>uso simples: clique no botão "Escolha os arquivos", envie e aguarde o botão de download.</li>
+                    <li>links ficarão disponíveis enquanto o usuário permanecer na página.</li>
+                    <li>layout básico: responsivo em dispositivos de tela pequena.</li>
+                    <li>arquivos são removidos do servidor automaticamente após a compressão.</li>
+                    <li>limite de seis arquivos por vez: para comprimir mais arquivos, basta atualizar a página. </li>
+                </ul>
+            </div>
+            <div id="contato">
+                <div>
+                    <h4>Nos envie uma mensagem enquanto aguarda!</h4>
+                    <small>o envio não trava a compressão (:</small>
+                </div>
+                <form>
+                    <label for="email">e-mail: </label>
+                    <input type="email" name="email" id="email">
+                    <label for="mensagem">mensagem: </label>
+                    <textarea name="mensagem" id="mensagem" cols="30" rows="10"></textarea>
+                    <button type="submit">
+                        Enviar 
+                        <img src="assets/email.png" alt="Banner">
+                    </button>
+                    <!-- <input type="submit" value="Enviar"> -->
+                </form>
+            </div>
+            <div id="privacidade">
+                <div class="div-banner">
+                    <img src="assets/cookie1.png" alt="Banner">
+                </div>
+                <h5>Política de privacidade</h5>
+                <p>Nosso site utiliza o google analytics para verificar a quantidade de acessos e a frequência de cliques nos botões de download.</p>
+                <p>Esta coleta de dados tem como objetivo investigar possíveis dificuldades ao utilizar a aplicação.</p>
+                <form action="">
+                    <legend>Defina suas preferências de privacidade</legend>
+                    <small><span>*</span>criaremos um cookie para salvar suas preferências!</small>
+                    <label for="privacy-content">Compartilhar minhas estatísticas de uso:</label>
+                    <select name="privacy-consent" id="privacy-consent">
+                        <option value="true">Compartilhar minhas estatísticas de uso</option>
+                        <option value="false"><b>Não</b> compartilhar minhas estatísticas de uso</option>
+                    </select>
+                </form>
+                <p class="message">
+                    Preferências salvas!
+                </p>
+            </div>
+            <div id="atribuicoes">
+                <h6>Nosso site utiliza materiais fornecidos por</h6>
+                <nav>
+                    <ul>
+                        <li><a href="https://undraw.co" title="unDraw" target="_blank">unDraw <img src="assets/undraw.png" alt="link para site unDraw"></a></li>
+                        <li><a href="https://www.flaticon.com/" title="Flaticon" target="_blank">Flaticon <img src="assets/flaticon.png" alt="Link para site Flaticon"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>
+
+<!-- https://undraw.co/ -->
+<!-- https://www.figma.com/ -->

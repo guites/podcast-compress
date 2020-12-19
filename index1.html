@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form class="box" method="post" action="" enctype="multipart/form-data">        
+      <div class="box__input">
+        <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple accept="audio/*"/>
+        <label for="file"><span class="box__click">Escolha os arquivos</span><span class="box__dragndrop"> ou arraste para cá</span>.</label>
+        <!-- <button class="box__button" type="submit">Escolha o arquivo!</button> -->
+      </div>
+      <div class="box__uploading">Uploading…</div>
+      <div class="box__success">Done!</div>
+      <div class="box__error">Error! <span></span>.</div>
+    </form>
+    <ol id="list-files">
+
+    </ol>
+      <script src="app.js"></script>
+</body>
+</html>
