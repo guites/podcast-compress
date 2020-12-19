@@ -16,7 +16,7 @@ body {
 }
 
 section {
-  height: 1020px;
+  height: 100%;
   width: 480px;
   border: 1px solid #ccc;
   border-radius: 30px;
