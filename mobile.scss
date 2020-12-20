@@ -138,6 +138,8 @@ main{
                     max-width:100%;
                     text-align:center;
                     position:relative;
+                    overflow-wrap:break-word;
+                    width:95%;
                     &:after{
                         content:"";
                         position:absolute;

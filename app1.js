@@ -131,8 +131,8 @@ function uploadFile(file,wrapperId){
     var downloadButton = wrapper.querySelector('a.download');
     var finalSize = wrapper.querySelector('p.after');
     var image = wrapper.querySelector('.button > img');
-    //  http://localhost:5000/api/v1/compress
     xhr.open("POST", "https://compress-audio.herokuapp.com/api/v1/compress");
+    // xhr.open("POST", "http://localhost:5000/api/v1/compress");
     xhr.responseType = "arraybuffer";
     xhr.upload.addEventListener("progress", function (e){
         var percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
@@ -149,7 +149,7 @@ function uploadFile(file,wrapperId){
 
     xhr.onload = function () {
         if(this.status == 200) {
-            console.log(xhr.response)
+            console.log(xhr.response);
             // verificar o erro que o arquivo retorna com ~7kb
 
             var blob = new Blob([xhr.response], {type: "audio/mpeg"});
@@ -171,12 +171,13 @@ function uploadFile(file,wrapperId){
             downloadButton.href = objectUrl;
             downloadButton.download = fileSplit[0] + '_comp.' + fileExt;
             downloadButton.target = "_blank"; 
+            downloadButton.title = "Clique para baixar";
             downloadButton.className = 'download';
             downloadButton.childNodes[0].textContent = 'Download';
             downloadButton.childNodes[1].src = "assets/reduce1.png";
 
-        } else {
-            console.log('error');
+        } else if(this.status == 415) {
+            console.log('unsupported media type');
         }
     }
 
