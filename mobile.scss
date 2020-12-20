@@ -393,6 +393,11 @@ footer{
         }
         p.message{
             color:#57b894;
+            opacity:1;
+            transition:opacity 300ms ease;
+            &.hidden{
+                opacity:0;
+            }
         }
     }
     #atribuicoes{

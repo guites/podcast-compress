@@ -198,6 +198,8 @@ main .buttons .wrapper .content .title {
   max-width: 100%;
   text-align: center;
   position: relative;
+  overflow-wrap: break-word;
+  width: 95%;
 }
 
 main .buttons .wrapper .content .title:after {
@@ -533,6 +535,13 @@ footer #privacidade form select {
 
 footer #privacidade p.message {
   color: #57b894;
+  opacity: 1;
+  -webkit-transition: opacity 300ms ease;
+  transition: opacity 300ms ease;
+}
+
+footer #privacidade p.message.hidden {
+  opacity: 0;
 }
 
 footer #atribuicoes {
