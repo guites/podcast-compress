@@ -127,7 +127,7 @@ function uploadFile(file,wrapperId){
     var finalSize = wrapper.querySelector('p.after');
     var image = wrapper.querySelector('.button > img');
 
-    xhr.open("POST", "https://compress-audio.herokuapp.com");
+    xhr.open("POST", "https://compress-audio.herokuapp.com/api/v1/compress");
     xhr.responseType = "arraybuffer";
     xhr.upload.addEventListener("progress", function (e){
         var percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
