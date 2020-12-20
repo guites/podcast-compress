@@ -169,7 +169,8 @@ function uploadFile(file,wrapperId){
 
 
             downloadButton.href = objectUrl;
-            downloadButton.download = fileSplit[0] + '_comp.' + fileExt; 
+            downloadButton.download = fileSplit[0] + '_comp.' + fileExt;
+            downloadButton.target = "_blank"; 
             downloadButton.className = 'download';
             downloadButton.childNodes[0].textContent = 'Download';
             downloadButton.childNodes[1].src = "assets/reduce1.png";
