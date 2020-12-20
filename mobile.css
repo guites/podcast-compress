@@ -133,6 +133,24 @@ main .buttons .wrapper .button {
   max-width: calc(35% - 30px);
 }
 
+main .buttons .wrapper .button .progress-bar {
+  height: 32px;
+  max-width: 100%;
+  width: 0%;
+  background-color: #8F00FF;
+  -webkit-transition: width 0.25s;
+  transition: width 0.25s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 main .buttons .wrapper .button img {
   width: 100%;
 }

@@ -97,6 +97,16 @@ main{
                 align-items:center;
                 flex-direction: column;
                 max-width: calc(35% - 30px);
+                .progress-bar{
+                    height:32px;
+                    max-width:100%;
+                    width:0%;
+                    background-color:#8F00FF;
+                    transition:width 0.25s;
+                    display:flex;
+                    justify-content: center;
+                    align-items:center;
+                }
                 img{
                     width:100%;
                     &.loading{
