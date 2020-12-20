@@ -28,10 +28,6 @@ section {
   scroll-behavior: smooth;
 }
 
-section:hover {
-  overflow-y: scroll;
-}
-
 section h2, section h4, section h5 {
   font-size: 24px;
   margin: 20px 0;
@@ -541,6 +537,123 @@ footer #atribuicoes nav ul li a img {
   to {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 767px) {
+  section {
+    width: 95%;
+    margin: 0 auto;
+    max-width: 1180px;
+    border: none;
+  }
+  section header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  section header svg {
+    display: none;
+  }
+  section header nav {
+    max-width: 480px;
+  }
+  section header img {
+    max-width: 480px;
+  }
+  section .drop {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  section .drop form {
+    width: 100%;
+    max-width: 480px;
+  }
+  section main {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  section main .buttons {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  section main .buttons .wrapper {
+    height: 100%;
+    max-width: 460px;
+    width: 49%;
+  }
+  section main .buttons .wrapper:nth-child(odd) {
+    margin-right: 10px;
+  }
+  section footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  section footer > div {
+    max-width: 767px;
+    width: calc(49% - 30px);
+  }
+  section footer > div#privacidade form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  section footer > div#privacidade h5 {
+    text-align: center;
+  }
+  section footer > div#contato {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 100%;
+    margin: auto 0;
   }
 }
 
