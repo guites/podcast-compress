@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   font-family: 'Poppins', sans-serif;
 }
@@ -151,6 +152,10 @@ main .buttons .wrapper .button .progress-bar {
           align-items: center;
 }
 
+main .buttons .wrapper .button .progress-bar.done {
+  display: none;
+}
+
 main .buttons .wrapper .button img {
   width: 100%;
 }
@@ -159,6 +164,10 @@ main .buttons .wrapper .button img.loading {
   max-width: 32px;
   -webkit-animation: rotation 3s linear infinite;
           animation: rotation 3s linear infinite;
+}
+
+main .buttons .wrapper .button img.loading.innactive {
+  display: none;
 }
 
 main .buttons .wrapper .button img.complete {
@@ -334,6 +343,38 @@ main .buttons .wrapper .content a.download.loading img {
           flex-direction: column;
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
+  position: relative;
+}
+
+.drop .box .box__input:after {
+  content: "Limite atingido! Atualize a página para enviar mais arquivos.";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: black;
+  color: white;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 300ms ease;
+  transition: opacity 300ms ease;
+}
+
+.drop .box .box__input.limit:after {
+  pointer-events: initial;
+  opacity: 1;
 }
 
 .drop .box .box__input .box__file {

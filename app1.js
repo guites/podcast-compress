@@ -9,7 +9,8 @@ var isAdvancedUpload = function() {
 
 var form = document.getElementsByClassName('box')[0];
 var boxClick = document.getElementsByClassName('box__click')[0];
-var filesList = document.getElementById('list-files');
+// var filesList = document.getElementById('list-files');
+var filesList = document.getElementsByClassName('buttons')[0];
 var fileInput = document.getElementById('file');
 
 
@@ -18,37 +19,55 @@ var fileInput = document.getElementById('file');
  */
 
 function insertFilesToList(file){
-    var li = document.createElement('LI');
-    
-    var upperDiv = document.createElement('DIV');
-    var lowerDiv = document.createElement('DIV');
 
-    upperDiv.innerHTML = "<span class='file-name'>" + file.name + "</span><span class='file-type'>" + formatType(file.type) + "</span></span class='file-size'>" + formatSize(file.size) + "</span>";
-    upperDiv.classList.add('upper');
+    var wrapper = document.createElement('DIV');
+    wrapper.className = 'wrapper';
 
-    lowerDiv.innerHTML = "<div class='progress-bar-fill'>Enviando: <span class='progress-bar-text'>0%</span></div><div class='progress-processando'><span>Processando: </span></div>";
-    lowerDiv.classList.add('lower');
-    
-    li.appendChild(upperDiv);
-    li.appendChild(lowerDiv);
+    wrapper.innerHTML = `
+    <div class="button">
+        <img class="loading innactive" src="assets/loader.png" alt="Carregando...">
+        <div class="progress-bar">0%</div>
+        Enviando...
+        <img src="assets/button11.png" alt="Ícone">
+    </div>
+    <div class="content">
+        <p class="title">${file.name}</p>
+        <p class="duration">Duração: - </p>
+        <div class="results">
+            <p class="before">${formatSize(file.size)}</p>
+            <img src="assets/right-arrow.png" alt="De para" class="arrow">
+            <p class="after">...</p>
+        </div>
+        <a href="" class="download loading" role="button" title="Aguarde o download ficar pronto">Aguarde<img src="assets/loader.png" alt="Botão de aguarde, download ainda não está pronto"></a>
+    </div>
+    `;
 
-    li.id = "file_" + (filesList.childElementCount); 
+    wrapper.id = "file_" + (filesList.childElementCount); 
 
-    filesList.appendChild(li);
+    filesList.appendChild(wrapper);
 
-    return li.id;
+    return wrapper.id;
 }
 
 
 function filesHandler(e){
     droppedFiles = e.target.files ? e.target.files : e.dataTransfer.files;
-    boxClick.innerText = 'Realizando a compressão...';
-    for(var i = 0; i < droppedFiles.length; i++){
-        var liId = insertFilesToList(droppedFiles[i]);
-        if(verifyFile(droppedFiles[i])){
-            uploadFile(droppedFiles[i],liId);
+
+    //verifica se já foi subido o limite de arquivos
+
+    var currFiles = document.querySelector('.buttons').childElementCount;
+    var maxFiles = 6; 
+    if(currFiles >= maxFiles){
+        document.querySelector('.box__input').classList.add('limit');
+    } else {
+        for(var i = 0; i < (maxFiles - currFiles); i++){
+            if (i > 5) return;
+            var wrapperId = insertFilesToList(droppedFiles[i]);
+            if(verifyFile(droppedFiles[i])){
+                uploadFile(droppedFiles[i],wrapperId);
+            }
+            
         }
-        
     }
 }
 
@@ -95,34 +114,58 @@ function uploadComplete(e){
     console.log(e);
 }
 
-function uploadFile(file,liId){
-    console.log(file,liId);
+function uploadFile(file,wrapperId){
+    console.log(file,wrapperId);
 
-    var LI = document.getElementById(liId);
+    var wrapper = document.getElementById(wrapperId);
     var xhr = new XMLHttpRequest();
     var formData = new FormData();
 
-    var processandoDiv = document.createElement("DIV");
-    LI.querySelector('.progress-processando').appendChild(processandoDiv);
 
-    xhr.open("POST", "http://localhost:5000/api/v1/compress");
+    var loadingBar = wrapper.querySelector('.button > .progress-bar');
+    var downloadButton = wrapper.querySelector('a.download');
+    var finalSize = wrapper.querySelector('p.after');
+    var image = wrapper.querySelector('.button > img');
+
+    xhr.open("POST", "https://compress-audio.herokuapp.com");
     xhr.responseType = "arraybuffer";
     xhr.upload.addEventListener("progress", function (e){
         var percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
-        LI.querySelector('.progress-bar-fill').style.width = percent + '%';
-        LI.querySelector('.progress-bar-text').textContent = percent + '%';
+        wrapper.querySelector('.progress-bar').style.width = percent + '%';
+        wrapper.querySelector('.progress-bar').textContent = percent.toFixed(2) + '%';
+        if(e.loaded == e.total){
+
+            loadingBar.classList.add('done');
+            loadingBar.nextSibling.textContent = 'Processando...';
+            image.className = 'loading';
+
+        }
     });
 
     xhr.onload = function () {
         if(this.status == 200) {
-            processandoDiv.className = 'done';
+
+            // verificar o erro que o arquivo retorna com ~7kb
+
             var blob = new Blob([xhr.response], {type: "audio/mpeg"});
             var objectUrl = URL.createObjectURL(blob);
-            var downloadButton = document.createElement("A");
+            
+            //imagem à esquerda
+            image.className = "complete";
+            image.src = "assets/complete.png";
+            loadingBar.nextSibling.textContent = 'Concluído!';
+
+            //tamanho pós compressão
+            finalSize.innerText = formatSize(blob.size);
+            
+            //botão de download
             downloadButton.href = objectUrl;
-            downloadButton.className = 'downloadButton';
-            downloadButton.textContent = 'Download';
-            LI.querySelector('.lower').appendChild(downloadButton);
+            downloadButton.className = 'download';
+            downloadButton.childNodes[0].textContent = 'Download';
+            downloadButton.childNodes[1].src = "assets/reduce1.png";
+
+        } else {
+            console.log('error');
         }
     }
 
