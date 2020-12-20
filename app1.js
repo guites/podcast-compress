@@ -19,7 +19,7 @@ var fileInput = document.getElementById('file');
  */
 
 function insertFilesToList(file){
-
+    console.log(file);
     var wrapper = document.createElement('DIV');
     wrapper.className = 'wrapper';
 
@@ -56,11 +56,16 @@ function filesHandler(e){
     //verifica se já foi subido o limite de arquivos
 
     var currFiles = document.querySelector('.buttons').childElementCount;
-    var maxFiles = 6; 
+    var maxFiles = 6;
+    var allowedRuns = maxFiles - currFiles;
+    if(droppedFiles.length < allowedRuns){
+        allowedRuns = droppedFiles.length;
+    }
+
     if(currFiles >= maxFiles){
         document.querySelector('.box__input').classList.add('limit');
     } else {
-        for(var i = 0; i < (maxFiles - currFiles); i++){
+        for(var i = 0; i < allowedRuns; i++){
             if (i > 5) return;
             var wrapperId = insertFilesToList(droppedFiles[i]);
             if(verifyFile(droppedFiles[i])){
@@ -126,7 +131,7 @@ function uploadFile(file,wrapperId){
     var downloadButton = wrapper.querySelector('a.download');
     var finalSize = wrapper.querySelector('p.after');
     var image = wrapper.querySelector('.button > img');
-
+    //  http://localhost:5000/api/v1/compress
     xhr.open("POST", "https://compress-audio.herokuapp.com/api/v1/compress");
     xhr.responseType = "arraybuffer";
     xhr.upload.addEventListener("progress", function (e){
@@ -144,7 +149,7 @@ function uploadFile(file,wrapperId){
 
     xhr.onload = function () {
         if(this.status == 200) {
-
+            console.log(xhr.response)
             // verificar o erro que o arquivo retorna com ~7kb
 
             var blob = new Blob([xhr.response], {type: "audio/mpeg"});
@@ -159,7 +164,12 @@ function uploadFile(file,wrapperId){
             finalSize.innerText = formatSize(blob.size);
             
             //botão de download
+            var fileSplit = file.name.split('.');
+            var fileExt = fileSplit[fileSplit.length - 1];
+
+
             downloadButton.href = objectUrl;
+            downloadButton.download = fileSplit[0] + '_comp.' + fileExt; 
             downloadButton.className = 'download';
             downloadButton.childNodes[0].textContent = 'Download';
             downloadButton.childNodes[1].src = "assets/reduce1.png";
