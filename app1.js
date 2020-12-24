@@ -132,7 +132,7 @@ function uploadFile(file,wrapperId){
     var finalSize = wrapper.querySelector('p.after');
     var image = wrapper.querySelector('.button > img');
     xhr.open("POST", "https://compress-audio.herokuapp.com/api/v1/compress");
-    // xhr.open("POST", "http://localhost:5000/api/v1/compress");
+   // xhr.open("POST", "http://localhost:5000/api/v1/compress");
     xhr.responseType = "arraybuffer";
     xhr.upload.addEventListener("progress", function (e){
         var percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
@@ -147,14 +147,24 @@ function uploadFile(file,wrapperId){
         }
     });
 
-    xhr.onload = function () {
-        if(this.status == 200) {
-            console.log(xhr.response);
-            // verificar o erro que o arquivo retorna com ~7kb
+    let fileName;
+    xhr.onreadystatechange = function(){
+        if(this.readyState == this.HEADERS_RECEIVED){
+            const contentDisposition = xhr.getResponseHeader("Content-Disposition");
+            const reg = /filename=\"(.*)\"/;
+            fileName = contentDisposition.match(reg)[1];
+        }
+    }
+    
 
-            var blob = new Blob([xhr.response], {type: "audio/mpeg"});
-            var objectUrl = URL.createObjectURL(blob);
+    xhr.onload = function () {
+        console.log();
+        if(this.status == 200) {
+            // console.log(xhr.response);
+            // verificar o erro que o arquivo retorna com ~7kb
             
+            var blob = new Blob([xhr.response]);
+            var objectUrl = URL.createObjectURL(blob);
             //imagem à esquerda
             image.className = "complete";
             image.src = "assets/complete.png";
@@ -162,14 +172,9 @@ function uploadFile(file,wrapperId){
 
             //tamanho pós compressão
             finalSize.innerText = formatSize(blob.size);
-            
-            //botão de download
-            var fileSplit = file.name.split('.');
-            var fileExt = fileSplit[fileSplit.length - 1];
-
 
             downloadButton.href = objectUrl;
-            downloadButton.download = fileSplit[0] + '_comp.' + fileExt;
+            downloadButton.download = fileName;
             downloadButton.target = "_blank"; 
             downloadButton.title = "Clique para baixar";
             downloadButton.className = 'download';
